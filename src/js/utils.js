@@ -57,10 +57,17 @@ export async function renderPartials() {
 }
 
 const BIBLE_API_BASE_URL = 'https://bible-api.com'; 
-const WIKTIONARY_API_BASE_URL = 'https://en.wiktionary.org/w/api.php'; 
+const WIKTIONARY_API_BASE_URL = 'https://en.wiktionary.org/w/api.php';
 
-export async function getScripture(reference) {
-    const endpoint = `/${encodeURIComponent(reference)}`; 
+export async function getScripture(reference, translation = 'web') {
+    
+    if (!reference || reference.trim() === '') {
+        throw new Error("Scripture reference cannot be empty.");
+    }
+    
+    const finalTranslation = translation ? translation.trim() : 'web'; 
+    
+    const endpoint = `/${encodeURIComponent(reference.trim())}?translation=${finalTranslation}`;
     const fullUrl = `${BIBLE_API_BASE_URL}${endpoint}`;
     
     console.log(`Fetching scripture from: ${fullUrl}`);
@@ -69,49 +76,59 @@ export async function getScripture(reference) {
         const response = await fetch(fullUrl);
         
         if (!response.ok) {
-            const errorBody = await response.json().catch(() => ({ error: 'Unknown API Error' }));
-            throw new Error(`Bible API HTTP error! Status: ${response.status}. Message: ${errorBody.error || response.statusText}`);
+            const errorBody = await response.json().catch(() => ({ 
+                error: `HTTP Error ${response.status}: Failed to parse API error.` 
+            }));
+            
+            throw new Error(errorBody.error || `Bible API HTTP Error! Status: ${response.status}`);
         }
         
         const data = await response.json();
+        
+        if (data.error) {
+             throw new Error(data.error);
+        }
+
         return data;
         
     } catch (error) {
-        console.error(`Error fetching scripture for ${reference}:`, error);
-        throw error;
+        console.error("Final Scripture Fetch Error:", error.message);
+        throw new Error(`Error fetching scripture: ${error.message}`);
     }
 }
 
-
 export async function getWiktionaryDefinition(word) {
-    const params = new URLSearchParams({
-        action: 'query',
-        titles: word,
-        prop: 'revisions',
-        rvprop: 'content', 
-        format: 'json',
-        origin: '*'
-    });
+    const fullUrl = `${WIKTIONARY_API_BASE_URL}?action=query&prop=revisions&titles=${word}&rvprop=content&format=json&origin=*`;
     
-    const fullUrl = `${WIKTIONARY_API_BASE_URL}?${params.toString()}`;
+    const response = await fetch(fullUrl);
+    
+    if (!response.ok) {
+        throw new Error(`Wiktionary API HTTP error! Status: ${response.status}`);
+    }
+    
+    return await response.json();
+}
 
-    console.log(`Searching Wiktionary for: ${fullUrl}`);
-
+export async function getRandomVerse() {
+    const BIBLE_API_BASE_URL = 'https://api.scripture.api.bible/v1/bibles'; 
+    const baseApiUrl = 'https://bible-api.com/data'; 
+    const translation = 'kjv'; 
+    const fullUrl = `${baseApiUrl}/${translation}/random`;
+    
+    
     try {
         const response = await fetch(fullUrl);
         
         if (!response.ok) {
-            throw new Error(`Wiktionary API HTTP error! Status: ${response.status}`);
+            throw new Error(`HTTP Error ${response.status}: Failed to fetch random KJV verse from: ${fullUrl}`);
         }
         
         const data = await response.json();
         
-        // Note: Wiktionary data requires parsing the nested JSON structure.
-        // It's not a direct definition string. We'll return the raw object for now.
         return data; 
         
     } catch (error) {
-        console.error(`Error fetching Wiktionary definition for ${word}:`, error);
-        throw error;
+        console.error("Error fetching random verse:", error.message);
+        throw new Error("Could not load random verse for the quiz.");
     }
 }

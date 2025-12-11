@@ -1,0 +1,18 @@
+[
+  { "key": "web", "name": "English - World English Bible (default)", "description": "web" },
+  { "key": "kjv", "name": "English - King James Version", "description": "kjv" },
+  { "key": "asv", "name": "English - American Standard Version (1901)", "description": "asv" },
+  { "key": "bbe", "name": "English - Bible in Basic English", "description": "bbe" },
+  { "key": "ylt", "name": "English - Young's Literal Translation (NT only)", "description": "ylt" },
+  { "key": "oeb-cw", "name": "English (UK) - Open English Bible, Commonwealth", "description": "oeb-cw" },
+  { "key": "webbe", "name": "English (UK) - World English Bible, British Edition", "description": "webbe" },
+  { "key": "oeb-us", "name": "English (US) - Open English Bible, US Edition", "description": "oeb-us" },
+  { "key": "darby", "name": "English - Darby Bible", "description": "darby" },
+  { "key": "dra", "name": "English - Douay-Rheims 1899 American Edition", "description": "dra" },
+  { "key": "cherokee", "name": "Cherokee - Cherokee New Testament", "description": "cherokee" },
+  { "key": "cuv", "name": "Chinese - Chinese Union Version", "description": "cuv" },
+  { "key": "bkr", "name": "Czech - Bible kralick\u00e1", "description": "bkr" },
+  { "key": "clementine", "name": "Latin - Clementine Latin Vulgate", "description": "clementine" },
+  { "key": "almeida", "name": "Portuguese - Jo\u00e3o Ferreira de Almeida", "description": "almeida" },
+  { "key": "rccv", "name": "Romanian - Protestant Romanian Corrected Cornilescu Version", "description": "rccv" }
+]

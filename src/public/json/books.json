@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Genesis",
+    "chapters": 50,
+    "abbr": "Gen"
+  },
+  {
+    "name": "Exodus",
+    "chapters": 40,
+    "abbr": "Exo"
+  },
+  {
+    "name": "Leviticus",
+    "chapters": 27,
+    "abbr": "Lev"
+  },
+  {
+    "name": "Numbers",
+    "chapters": 36,
+    "abbr": "Num"
+  },
+  {
+    "name": "Deuteronomy",
+    "chapters": 34,
+    "abbr": "Deu"
+  },
+  {
+    "name": "Joshua",
+    "chapters": 24,
+    "abbr": "Jos"
+  },
+  {
+    "name": "Judges",
+    "chapters": 21,
+    "abbr": "Jug"
+  },
+  {
+    "name": "Ruth",
+    "chapters": 4,
+    "abbr": "Rut"
+  },
+  {
+    "name": "1 Samuel",
+    "chapters": 31,
+    "abbr": "1Sa"
+  },
+  {
+    "name": "2 Samuel",
+    "chapters": 24,
+    "abbr": "2Sa"
+  },
+  {
+    "name": "Matthew",
+    "chapters": 28,
+    "abbr": "Mat"
+  },
+  {
+    "name": "Mark",
+    "chapters": 16,
+    "abbr": "Mar"
+  },
+  {
+    "name": "Luke",
+    "chapters": 24,
+    "abbr": "Luk"
+  },
+  {
+    "name": "John",
+    "chapters": 21,
+    "abbr": "Jhn"
+  },
+  {
+    "name": "Acts",
+    "chapters": 28,
+    "abbr": "Act"
+  },
+  {
+    "name": "Romans",
+    "chapters": 16,
+    "abbr": "Rom"
+  }
+]
