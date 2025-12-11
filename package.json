@@ -9,7 +9,8 @@
     "lint": "eslint *.js src/**/*.js",
     "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\"",
     "test": "jest",
-    "dev": "vite dev --host"
+    "dev": "vite dev --host",
+    "preview": "vite preview" 
   },
   "devDependencies": {
     "vite": "^7.2.4"
