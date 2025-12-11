@@ -11,7 +11,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "src/index.html"),
         
-        trivia: resolve(__dirname, "src/quiz/index.html"),
+        trivia: resolve(__dirname, "src/trivia/index.html"),
         
         history: resolve(__dirname, "src/history/index.html"),
       },
