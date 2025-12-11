@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/landing.css">
   <script src="js/main.js" type="module"></script>
-  
+
 </head>
 
 <body>
@@ -16,7 +16,35 @@
 
   <main class="landing-main">
     <section class="hero-section">
-      <h1>Your dedicated space for recording scripture insights</h1>
+    <h1>Your dedicated space for recording scripture insights</h1>
+    <h2>Fetch Scripture</h2>
+    <form id="fetch-scripture-form">
+    
+      <div class="form-row">
+        <label for="book">Book:</label>
+        <select id="book" name="book" required>
+          <option value="" disabled selected>Loading Books...</option>
+        </select>
+      </div>
+    
+      <div class="form-row">
+        <label for="translation">Translation:</label>
+        <select id="translation" name="translation">
+          <option value="" disabled selected>Loading Translations...</option>
+        </select>
+      </div>
+    
+      <div class="form-row">
+        <label for="verse-input">Verse(s):</label>
+        <input type="text" id="verse-input" name="verses" placeholder="e.g., 3:16" required>
+      </div>
+    
+      <button type="submit" class="btn-primary">Fetch Scripture</button>
+    </form>
+    </section>
+
+    <section id="scripture-display-area" class="card-display">
+      <p>Scripture will appear here after search.</p>
     </section>
   </main>
 

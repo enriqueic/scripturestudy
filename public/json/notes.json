@@ -1,0 +1,25 @@
+[
+  {
+    "noteId": "guide-001",
+    "scriptureRef": "Welcome to NoteWise!",
+    "noteContent": "This app helps you capture inspired thoughts! This helps you write a note, select keywords, and challenge yourself on your scripture knowledge. Your notes are saved on your browser's localstorage. Try adding your first note now!",
+    "dateCreated": "2025-12-11T08:00:00Z",
+    "keywords": ["welcome", "tutorial"],
+    "noteTitle": "App Guide",
+    "lastModified": "2025-12-11T08:00:00Z",
+    "associatedQuizScore": 0,
+    "isFavorite": true
+  },
+  {
+    "noteId": "sample-002",
+    "scriptureRef": "Alma 32:27",
+    "noteContent": "The concept of 'experimenting upon the word' is a beautiful metaphor for developing faith. It implies action and observation, not just passive belief.",
+    "dateCreated": "2025-12-10T14:30:00Z",
+    "keywords": ["faith", "word", "experiment"],
+    "NoteTitle": "Personal Study",
+    "moodScore": 4,
+    "lastModified": "2025-12-10T14:30:00Z",
+    "associatedQuizScore": 85,
+    "isFavorite": false
+  }
+]
