@@ -15,7 +15,6 @@ function cleanWikiContent(wikiText) {
     return cleanedText.trim();
 }
 
-// EXPORTED: Initializes the modal structure and attaches general close listeners.
 export function setupModal() {
     const modalHTML = `
         <div id="definition-modal" class="modal">
@@ -47,7 +46,7 @@ export function setupModal() {
     });
 }
 
-// EXPORTED: Makes the rendered scripture text interactive for word lookup.
+// Makes the rendered scripture text interactive for word lookup.
 export function setupWordLookup(elementId, scriptureRef) {
     const scriptureTextElement = document.getElementById(elementId);
     if (!scriptureTextElement) return;
@@ -72,7 +71,6 @@ export function setupWordLookup(elementId, scriptureRef) {
     });
 }
 
-// MANDATORY FIX: This entire function was missing and must be re-inserted.
 async function showDefinitionModal(word, scriptureRef) {
     const modal = document.getElementById('definition-modal');
     const title = document.getElementById('modal-word-title');
@@ -102,7 +100,6 @@ async function showDefinitionModal(word, scriptureRef) {
         body.innerHTML = `<pre class="wiki-content">${finalDisplayContent}</pre>`; 
         
     } catch (error) {
-        // If the fetch fails, this still opens the modal to display the error.
         body.innerHTML = `<p class="error-message">Could not fetch definition: ${error.message}</p>`;
     }
 }

@@ -1,23 +1,9 @@
-import { renderPartials, getScripture} from "./utils.js";
+import { renderPartials, getScripture, fetchJSON} from "./utils.js";
 import { setupModal, setupWordLookup } from "./wordLookup.mjs";
 import { getNoteFormHTML, attachFormListeners } from "./noteInputForm.mjs";
 
-// --- Global Data Store (MANDATORY FIX) ---
 let allBooksData = []; 
 
-
-async function fetchJSON(url) {
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
-        }
-        return await response.json();
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
-}
 
 async function populateDropdowns() {
     const bookSelect = document.getElementById('book');
@@ -26,7 +12,6 @@ async function populateDropdowns() {
     const fetchedBooks = await fetchJSON('../json/books.json');
     const translations = await fetchJSON('../json/translations.json');
 
-    // MANDATORY FIX 1: Store the book data globally
     if (fetchedBooks) {
         allBooksData = fetchedBooks; 
     }
@@ -42,15 +27,12 @@ async function populateDropdowns() {
         });
         bookSelect.value = 'Genesis'; 
         
-        // MANDATORY FIX 2: Add the change listener
         bookSelect.addEventListener('change', updateChapterDropdown);
         
-        // MANDATORY FIX 3: Initialize the chapter dropdown
         populateChapters(bookSelect.value); 
         console.log("Books dropdown populated dynamically.");
     }
     
-    // --- Translation Dropdown Population (Using old 'translations' variable name) ---
     if (translationSelect && translations) {
         translationSelect.innerHTML = '';
         translations.forEach(t => { 
@@ -65,14 +47,10 @@ async function populateDropdowns() {
 }
 
 
-/**
- * NEW MANDATORY FUNCTION: Populates the chapter dropdown.
- */
 function populateChapters(selectedBookName) {
     const chapterSelect = document.getElementById('chapter');
     if (!chapterSelect) return;
 
-    // Find the selected book data using the global store
     const bookData = allBooksData.find(book => book.name === selectedBookName);
     const maxChapters = bookData ? bookData.chapters : 0;
 

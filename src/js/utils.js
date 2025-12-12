@@ -56,6 +56,21 @@ export async function renderPartials() {
     }
 }
 
+export async function fetchJSON(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+        return null;
+    }
+}
+
+//API Utilities
+
 const BIBLE_API_BASE_URL = 'https://bible-api.com'; 
 const WIKTIONARY_API_BASE_URL = 'https://en.wiktionary.org/w/api.php';
 

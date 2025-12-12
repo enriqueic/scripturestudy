@@ -73,7 +73,6 @@ function handleGuess(event) {
 
     // User Guesses
     const guessBook = document.getElementById('guess-book').value.trim();
-    // Use Number() to get the numerical value, which results in 0 or NaN if field is empty
     const guessChapter = Number(document.getElementById('guess-chapter').value); 
     const guessVerse = Number(document.getElementById('guess-verse').value);
     
@@ -82,7 +81,6 @@ function handleGuess(event) {
     let feedback = '';
     const MAX_SCORE = 6; // Max is 1 (Book) + 2 (Chapter) + 3 (Verse)
 
-    // --- 1. Check Book (1 Point) ---
     const bookCorrect = guessBook.toLowerCase() === correctBook.toLowerCase();
     if (bookCorrect) {
         totalScore += 1; // 1 point for the book
@@ -90,9 +88,7 @@ function handleGuess(event) {
     } else {
         feedback += `<p class="incorrect">❌ Book Guess: Incorrect. (Was: ${correctBook})</p>`;
     }
-
-    // --- 2. Check Chapter (2 Points, Optional) ---
-    // Check if the user attempted a guess (value is not NaN and is > 0)
+    // Check if the user attempted a guess (chapter)
     if (!isNaN(guessChapter) && guessChapter > 0) {
         const chapterCorrect = guessChapter === correctChapter;
         if (chapterCorrect) {
@@ -105,8 +101,7 @@ function handleGuess(event) {
          feedback += `<p class="info">— Chapter Guess: Skipped (0 pts)</p>`;
     }
 
-    // --- 3. Check Verse (3 Points, Optional) ---
-    // Check if the user attempted a guess
+    // Check if the user attempted a guess (verse)
     if (!isNaN(guessVerse) && guessVerse > 0) {
         const verseCorrect = guessVerse === correctVerse;
         if (verseCorrect) {

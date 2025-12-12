@@ -7,8 +7,6 @@ export class NoteManager {
         this.notes = [];
     }
 
-    // --- Loading and Initialization ---
-
     async loadNotes() {
         const storedNotes = localStorage.getItem(NOTES_STORAGE_KEY);
         
@@ -21,9 +19,8 @@ export class NoteManager {
             rawNotes = await this.fetchInitialNotes();
         }
         
-        // FIX: Reconstitute raw objects into Note class instances (Rehydration)
+        // Reconstitute raw objects into Note class instances (Rehydration)
         this.notes = rawNotes.map(noteObj => {
-            // Note: We use the existing object properties to instantiate the class
             const rehydratedNote = new Note(
                 noteObj.scriptureRef,
                 noteObj.noteContent,
@@ -33,7 +30,7 @@ export class NoteManager {
                 noteObj.associatedQuizScore || 0,
                 noteObj.isFavorite || false
             );
-            // Crucial: Overwrite the generated ID/timestamp with the saved data
+            // Overwrite the generated ID/timestamp with the saved data
             rehydratedNote.id = noteObj.id;
             rehydratedNote.timestamp = noteObj.timestamp;
             return rehydratedNote;
@@ -44,7 +41,6 @@ export class NoteManager {
 
     async fetchInitialNotes() {
         try {
-            // FIX: Use the correct relative path for /js/ to /data/
             const response = await fetch('../data/notesHistory.json'); 
             
             if (!response.ok) {
@@ -54,28 +50,22 @@ export class NoteManager {
             return initialNotes;
         } catch (error) {
             console.error("Error fetching initial notes:", error);
-            // Return empty array if fetch fails, so the app doesn't crash
             return []; 
         }
     }
-
-    // --- Saving and Adding ---
-
+    
     saveNotes() {
         try {
-            // Store the raw object data, not the class methods
             const notesJSON = JSON.stringify(this.notes);
             localStorage.setItem(NOTES_STORAGE_KEY, notesJSON);
             console.log(`Saved ${this.notes.length} notes to Local Storage.`);
         } catch (e) {
             console.error("Error saving notes to Local Storage:", e);
-            // Inform the user of a critical failure
             alert("Warning: Could not save notes! Storage capacity might be full.");
         }
     }
 
     addNote(noteData) {
-        // Creates a new Note instance, which automatically generates ID and timestamp
         const newNote = new Note(
             noteData.scriptureRef,
             noteData.noteContent,
@@ -85,24 +75,18 @@ export class NoteManager {
             noteData.associatedQuizScore,
             noteData.isFavorite
         );
-
-        // Add the new note to the beginning of the array (latest first)
         this.notes.unshift(newNote);
         this.saveNotes();
         return newNote;
     }
 
-    // --- Retrieval and Deletion ---
 
     getAllNotes() {
-        // Return a copy to prevent external modification of the internal array
         return [...this.notes];
     }
     
     /**
-     * Deletes a note by its unique ID.
-     * @param {string} noteId - The ID of the note to delete.
-     * @returns {boolean} True if a note was deleted, false otherwise.
+     * Deletes a note by its unique ID (noteId). Returns true if deleted, false otherwise.
      */
     deleteNote(noteId) {
         const initialLength = this.notes.length;

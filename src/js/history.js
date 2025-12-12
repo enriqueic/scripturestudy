@@ -4,9 +4,6 @@ import { NoteManager } from './noteManager.mjs';
 const noteManager = new NoteManager();
 const historyDisplayAreaId = 'note-history-display-area';
 
-/**
- * Renders the full list of notes into the history view.
- */
 async function renderHistoryView() {
     const displayArea = document.getElementById(historyDisplayAreaId);
     if (!displayArea) return;
@@ -14,7 +11,6 @@ async function renderHistoryView() {
     displayArea.innerHTML = '<p>Loading note history...</p>';
 
     try {
-        // Load data from Local Storage or fallback JSON
         const notes = await noteManager.loadNotes();
         
         if (notes.length === 0) {
@@ -48,8 +44,7 @@ async function renderHistoryView() {
         });
 
         displayArea.innerHTML = notesHTMLArray.join('');
-        
-        // NEW: Attach listeners after rendering is complete
+    
         attachDeleteListeners(); 
 
     } catch (error) {
@@ -58,9 +53,7 @@ async function renderHistoryView() {
     }
 }
 
-/**
- * Attaches event listeners for the Delete buttons using event delegation.
- */
+
 function attachDeleteListeners() {
     const displayArea = document.getElementById(historyDisplayAreaId);
     if (!displayArea) return;
@@ -68,7 +61,6 @@ function attachDeleteListeners() {
     displayArea.addEventListener('click', (event) => {
         const target = event.target;
         
-        // Check if the clicked element is a delete button
         if (target.classList.contains('delete-note-btn')) {
             const noteId = target.dataset.id;
             
@@ -76,13 +68,11 @@ function attachDeleteListeners() {
                 const wasDeleted = noteManager.deleteNote(noteId);
                 
                 if (wasDeleted) {
-                    // Visually remove the card from the DOM without full re-render
                     const noteCard = target.closest('.note-card');
                     if (noteCard) {
                         noteCard.remove();
                     }
                     
-                    // Optional: If the list is now empty, re-render to show "No notes found"
                     if (noteManager.getAllNotes().length === 0) {
                         renderHistoryView();
                     }
@@ -94,7 +84,6 @@ function attachDeleteListeners() {
         }
     });
 }
-
 
 document.addEventListener('DOMContentLoaded', () => {
     renderPartials(); 
