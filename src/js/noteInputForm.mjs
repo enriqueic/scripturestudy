@@ -1,4 +1,4 @@
-import { NoteManager } from './NoteManager.mjs'; 
+import { NoteManager } from './noteManager.mjs'; 
 
 const noteManager = new NoteManager();
 
