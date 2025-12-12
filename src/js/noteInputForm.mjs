@@ -18,7 +18,7 @@ export function getNoteFormHTML(scriptureRef) {
                 <div class="input-group">
                     <div class="form-row half-width">
                         <label for="reading-context">Context/Topic:</label>
-                        <input type="text" id="reading-context" required placeholder="e.g., Sermon, Study Group">
+                        <input type="text" id="reading-context" required placeholder="e.g., Talk, Study Group">
                     </div>
 
                     <div class="form-row half-width">
