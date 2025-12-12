@@ -1,5 +1,5 @@
 import { renderPartials } from './utils.js';
-import { NoteManager } from './NoteManager.mjs';
+import { NoteManager } from './noteManager.mjs';
 
 const noteManager = new NoteManager();
 const historyDisplayAreaId = 'note-history-display-area';
